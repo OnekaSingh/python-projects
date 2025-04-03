@@ -37,3 +37,48 @@ total_time = round(end_time - start_time, 2)
 
 print("----------------------")
 print("Nice work! You finished in", total_time, "seconds! You got", wrong, "problems wrong.")
+
+
+#Algebra (Modified) Math Game:
+
+import random
+import time
+
+OPERATORS = ["+", "-", "*"]
+MIN_OPERAND = 3
+MAX_OPERAND = 12
+
+def generate_problem():
+    left = random.randint(MIN_OPERAND, MAX_OPERAND) #chooses a random number from 3-12
+    right = random.randint(MIN_OPERAND, MAX_OPERAND) #chooses random from 3-12
+    operator = random.choice(OPERATORS) #randomly chooses an operator (choice chooses element from list)
+
+    expr = str(left) + " " + operator + " " + str(right) #3 + 6
+    answer = eval(expr) #evaluates string as an expresion (like 6 - 3 = )
+    return expr, answer, left, right, operator
+
+wrong = 0
+
+total_problems = input("How many problems do you want? ")
+input("Press enter to start, and q to quit anytime! ")
+print("----------------------")
+
+start_time = time.time()
+guess = "invalid"
+
+for i in range(int(total_problems)):
+    expr, answer, left, right, operator = generate_problem()
+    while guess != "q":
+        print("Problem #" + str(i + 1) + ": " + str(left) + " " + str(operator) + " x = " + str(answer))
+        guess = input("What is the value of x? ")
+        if guess == str(right):
+            break
+        print("That is wrong. Try again.")
+        wrong += 1
+
+
+end_time = time.time()
+total_time = int(end_time - start_time)
+
+print("----------------------")
+print("Nice work! You finished in", total_time, "seconds! You got", wrong, "problems wrong.")
